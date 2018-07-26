@@ -1,0 +1,106 @@
+
+# PLEASE READ THIS FILE FIRST.
+
+# ------------------------- General Info. -----------------------------:
+#
+# This is a package for computing the Kuhn-Munkres Hungarian algorithm(KMH), and
+# the Interval Hungarian algorithm(IHM) designed in our group. 
+#
+# The implementation is written in C++ and utilizes STL as main data structures.
+# The algorithm assumes the input a MAXIMIZATION problem and finds the maximal 
+# ouputs (the optimality & the matching pairs for KMH, and the intervals of 
+# all utilities for IHM) through manipulating the bipartite graph.
+# 
+# NOTE that, the time complexity of this implementation could be more than 
+# O(N^3) but should be less than O(N^4), due to simple data structure used. 
+# Time can still be improved.
+#
+# You can freely use this code, and we are grateful if you can cite our work:
+# Lantao Liu, Dylan Shell. "Assessing Optimal Assignment under Uncertainty: An Interval-based Algorithm". International Journal of Robotics Research (IJRR). vol. 30, no. 7, pp 936-953. Jun 2011.
+# Or other related work posted on my page: http://students.cse.tamu.edu/lantao/
+#
+# Lantao Liu, <lantao@cse.tamu.edu>
+# Dept. of Computer Science and Engineering, 
+# Texas A&M University, TX, 77843-3112.
+# Nov 9, 2009.
+# Last updated on 9/27/2011
+#
+# --------------------------------------------
+
+
+In this package, two main methods are provided:
+	* Kuhn-Munkres Hungarian algorithm (KMH)
+	* Interval Hungarian Method (IHM)
+
+
+
+== To Start ==:
+
+The code has been tested in Ubuntu 9.04+ and Mac OS 10.5., with the gcc4.3.3
+You need to install GNUplot if you want to see the plots.
+
+
+== How to Use ==:
+
+To compile KMH, just type 'make kmh';
+To compile IHM, just type 'make ihm';
+To compile both, just type 'make all';
+To clean, just type 'make clean'
+
+The running methods as well as the command options are provided below:
+Type "kmh/ihm -h" to prompt below usage options.
+
+Command line details:
+	./kmh (or ./ihm)
+		-i <file>       #specify <file> which assignment will be 
+				#imported from. <file> contains a matrix.
+				#see "example.demo" inside folder.
+				#Default: randomly generating assingment
+		-r <size_t>     #use random generator instead of input file,
+				#<size_t> should specify seed for generator,
+				#this helps analyze one specific assignment
+				#Default: time(Null)
+		-m <size_t>	#if use random generator, tell me the size
+				#Default: 3x3 
+		-p <size_t>	#specifiy the plot level, only allow 0,1,2
+				#0: no plot;
+				#1: ONLY plot Kuhn-Munkres even in IHM;
+				#2: plot Kuhn-Munkres & intervals in IHM algo.
+				#Default: 0,  no plot
+		-t <size_t>	#if plot, and you want to see slide show,
+				#then specify the interval period by second.
+				#Default: 0, that is, need manually operated.
+		-v <size_t>	#specify the verbose level, only allow 0,1,2
+				#0: nothing will print onto screen but result
+				#1: only print important steps information
+				#2: print all information including sets result
+				#Default: 1, normal level
+
+				#The random generater by default can genenerate
+				#natrual number from 0 to 100. You can grep and
+				#change macro MAX_RANDOM for other values
+				
+
+For instance:
+	./kmh
+		run Hungarian with a 3x3 random assignment everytime.
+	./kmh -i example
+		run Hungarian on this example assignment
+	./kmh -r 10 
+		run Hungrian with random seed 10, on a default 3x3 assignment
+	./kmh -r 10 -m 5
+		run Hungarian with random seed 10, on a 5x5 assignment
+
+	./kmh -p 1
+		run Hungarian with gnuplot
+	./kmh -p 1 -t 2
+		run Hungarian with gnuplot, result is slide show (period = 2)
+	./kmh -v 0
+		run Hungarian, nothing will be printed on screen except result
+
+#All above rules also applies to ihm, besides, ihm allows choosing plot level
+	./ihm -p 1		#Means only plot Kuhn-Munkres
+	./ihm -p 2 -t 1		#Means besides plotting Kuhn-Munkres, plot intervals for all edges.
+				#In this case I strongly recommend you the slide show mode
+
+	

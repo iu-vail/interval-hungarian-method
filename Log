@@ -1,0 +1,14 @@
+
+# blender version, contains original hungarian algo and interval branch.
+# powerful than original version.
+# 11/2009
+
+# modified to allow double and negative data typed assignment
+# 3/17/2010
+
+# sligtly modified the usage.
+# 8/3/2010
+
+# version 2.0
+# removed the dependency on MTL, mtl:matrix->2D vectors
+# 9/27/2011
